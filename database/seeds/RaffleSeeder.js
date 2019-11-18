@@ -1,0 +1,37 @@
+'use strict'
+
+/*
+|--------------------------------------------------------------------------
+| RaffleSeeder
+|--------------------------------------------------------------------------
+|
+| Make use of the Factory instance to seed database with dummy data or
+| make use of Lucid models directly.
+|
+*/
+
+/* Requiring Seeders */
+const TicketSeeder = require('./TicketSeeder');
+const AwardSeeder = require('./AwardSeeder');
+
+/** @type {import('@adonisjs/lucid/src/Factory')} */
+const Factory = use('Factory')
+const User = use('App/Models/User')
+
+class RaffleSeeder {
+  static async run(number, users) {
+    let raffles;
+
+    users.forEach(async u => {
+      raffles = await Factory.model('App/Models/Raffle').makeMany(number);
+      raffles = await u.raffles().saveMany(raffles);
+
+      await raffles.forEach(async r => {
+        await TicketSeeder.run(3, r);
+        await AwardSeeder.run(3, r);
+      });
+    });
+  }
+}
+
+module.exports = RaffleSeeder

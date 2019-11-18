@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| UserSeeder
+| DatabaseSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -10,24 +10,25 @@
 |
 */
 
+/* Requiring Seeders */
+const UserSeeder = require('./UserSeeder');
+const RaffleSeeder = require('./RaffleSeeder');
+
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const Database = use('Database');
 
 class DatabaseSeeder {
-  async run () {
+  async run() {
     await Database.raw('SET FOREIGN_KEY_CHECKS = 0;')
     await Database.truncate('users');
     await Database.truncate('raffles');
+    await Database.truncate('tickets');
+    await Database.truncate('awards');
     await Database.raw('SET FOREIGN_KEY_CHECKS = 1;')
-    
-    const users = await Factory.model('App/Models/User').createMany(10);
-    users.forEach(async u => {
-      const raffles = Factory.model('App/Models/Raffle').makeMany(5)
-        .then(async (raffles) => {
-          await u.raffles().saveMany(raffles);
-        });
-    })
+
+    const users = await UserSeeder.run(3);
+    await RaffleSeeder.run(5, users);
   }
 }
 

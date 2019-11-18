@@ -27,17 +27,30 @@ Factory.blueprint('App/Models/User', async (faker) => {
 })
 
 Factory.blueprint('App/Models/Raffle', async (faker) => {
-    const date = new Date();
-    const startDate = new Date();
-    const endDate = new Date(date.setMonth(date.getMonth() + 1));
-    
-    return {
-        title: faker.word({ syllables: 5 }),
-        description: faker.sentence(),
-        probable_raffle_date: endDate,
-        start_date_sale: startDate,
-        end_date_sale: endDate,
-        raffle_date: endDate,
-        ticket_price: faker.floating({ fixed: 2, min: 0, max: 500 })
-    }
+  const date = new Date();
+  const startDate = new Date();
+  const endDate = new Date(date.setMonth(date.getMonth() + 1));
+
+  return {
+    title: faker.word({ syllables: 5 }),
+    description: faker.sentence(),
+    probable_raffle_date: endDate,
+    start_date_sale: startDate,
+    end_date_sale: endDate,
+    raffle_date: endDate,
+    ticket_price: faker.floating({ fixed: 2, min: 0, max: 500 })
+  }
+})
+
+Factory.blueprint('App/Models/Ticket', async (faker, i) => {
+  return {
+    number: i + 1
+  }
+})
+
+Factory.blueprint('App/Models/Award', async (faker, i) => {
+  return {
+    description: faker.sentence(),
+    placing: i + 1
+  }
 })
