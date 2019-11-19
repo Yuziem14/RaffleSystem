@@ -50,7 +50,7 @@ Factory.blueprint('App/Models/Ticket', async (faker, i) => {
 
 Factory.blueprint('App/Models/Award', async (faker, i) => {
   return {
-    description: faker.sentence(),
+    description: faker.word({ syllables: 10 }),
     placing: i + 1
   }
 })

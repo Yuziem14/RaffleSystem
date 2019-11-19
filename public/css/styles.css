@@ -1,10 +1,33 @@
+@keyframes slidein {
+    from {
+        left: -1000px;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideinTop {
+    from {
+        top: -1000px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
 body {
     margin-top: 56px;
 }
 
 .main {
     background-color: #333;
-    height: 100vh;
 }
 
 .painel {
@@ -13,14 +36,29 @@ body {
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.4)
         ),
-        url(../images/tickets.jpg);
-    
+        url(../images/raffle_image.jpg);
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .side-component {
+    animation: slideinTop 2s;
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     border-top: solid 4px #00a8ff;
+}
+
+.welcome_text {
+    position: relative;
+    animation: slidein 2s;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+}
+
+.boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
 }

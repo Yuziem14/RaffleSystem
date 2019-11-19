@@ -17,7 +17,7 @@ class AuthController {
   async register({ request, auth, response, session }) {
     const payload = request.only([
       "email",
-      "username",
+      "name",
       "password",
       "password_confirmation"
     ]);

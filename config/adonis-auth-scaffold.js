@@ -85,7 +85,7 @@ module.exports = {
   validationRules: {
     registration: {
       email: "required|email",
-      username: "required",
+      name: "required|min:3",
       password: "required",
       password_confirmation: "required|same:password"
     }
@@ -101,13 +101,14 @@ module.exports = {
   */
   validationMessages: action => {
     return {
-      "uid.required": "Username or E-mail must be filled.",
-      "username.required": "Username must be filled.",
-      "email.required": "E-mail must be filled.",
-      "email.email": "Please use a valid e-mail address.",
-      "password.required": "Password must be filled.",
-      "password.mis_match": "Invalid password.",
-      "password_confirmation.same": `Password confirmation must be same as password.`
+      "uid.required": "Preencha o email ou nome de usuario!.",
+      "name.required": "O nome é obrigatorio!",
+      "name.min": "O campo nome deve ter ao menos 3 caracteres!",
+      "email.required": "O Email é obrigatorio!",
+      "email.email": "Use um endereço de Email valido!",
+      "password.required": "Informe uma senha!",
+      "password.mis_match": "Senha invalida!",
+      "password_confirmation.same": `Confirme a senha corretamente!`
     };
   }
 };

@@ -24,17 +24,17 @@
         @endif
     </div>
     <div class="form-group required">
-      <label for="username" class="required text-white">Nome <abbr title="required"></abbr></label>
+      <label for="name" class="required text-white">Nome <abbr title="required"></abbr></label>
       <input
         class="form-control required"
         type="text"
         required="required"
         aria-required="true"
-        value="{{ old('username', '') }}"
-        name="username"
-        id="username" />
-        @if(hasErrorFor('username'))
-          <small class="form-text text-danger">{{ getErrorFor('username') }}</small>
+        value="{{ old('name', '') }}"
+        name="name"
+        id="name" />
+        @if(hasErrorFor('name'))
+          <small class="form-text text-danger">{{ getErrorFor('name') }}</small>
         @endif
     </div>
     <div class="form-group required">
