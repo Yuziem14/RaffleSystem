@@ -20,16 +20,15 @@ const User = use('App/Models/User')
 
 class RaffleSeeder {
   static async run(number, users) {
-    let raffles;
-
     users.forEach(async u => {
-      raffles = await Factory.model('App/Models/Raffle').makeMany(number);
-      raffles = await u.raffles().saveMany(raffles);
+      const raffles = await Factory.model('App/Models/Raffle').makeMany(number);
+      await u.raffles().saveMany(raffles);
 
       await raffles.forEach(async r => {
-        await TicketSeeder.run(3, r);
+        await TicketSeeder.run(10, r);
         await AwardSeeder.run(3, r);
       });
+
     });
   }
 }

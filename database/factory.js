@@ -22,7 +22,7 @@ Factory.blueprint('App/Models/User', async (faker) => {
     email: faker.email(),
     photo: 'noimage.png',
     admin: faker.bool(),
-    password: await Hash.make('secret123')
+    password: 'secret123'
   }
 })
 
@@ -38,7 +38,7 @@ Factory.blueprint('App/Models/Raffle', async (faker) => {
     start_date_sale: startDate,
     end_date_sale: endDate,
     raffle_date: endDate,
-    ticket_price: faker.floating({ fixed: 2, min: 0, max: 500 })
+    ticket_price: faker.floating({ fixed: 2, min: 0, max: 50 })
   }
 })
 
