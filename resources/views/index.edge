@@ -1,0 +1,23 @@
+@layout('layouts.app')
+
+@section('view-title')
+Welcome
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="painel painel--dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 pt-5">
+                        <h3 class="text-center text-white">Bem Vindo ao Gerenciador de Rifas.</h3>
+                        <h3 class="text-center text-white">Registre-se!</h3>
+                    </div>
+                    <div class="col-md-6 col-sm-6 pt-5 side-component">
+                        @include('auth.register')
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </main>
+@endsection

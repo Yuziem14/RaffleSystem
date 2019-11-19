@@ -1,10 +1,12 @@
-@layout('layouts.auth')
+@layout('layouts.app')
 @section('view-title')
 Dashboard
 @endsection
 @section('content')
-  <div class="alert alert-success">
-      Signed in as <strong>{{ auth.user.name }}</strong>
-      <a href="{{ Config.get('adonis-auth-scaffold.logoutRoute') }}" class="btn btn-danger btn-sm">Logout</a>
+  <div class="container">
+    <div class="alert alert-success">
+        Signed in as <strong>{{ auth.user.name }}</strong>
+        <a href="{{ Config.get('adonis-auth-scaffold.logoutRoute') }}" class="btn btn-danger btn-sm">Logout</a>
+    </div>
   </div>
 @endsection

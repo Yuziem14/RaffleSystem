@@ -1,0 +1,26 @@
+body {
+    margin-top: 56px;
+}
+
+.main {
+    background-color: #333;
+    height: 100vh;
+}
+
+.painel {
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)
+        ),
+        url(../images/tickets.jpg);
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.side-component {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-top: solid 4px #00a8ff;
+}
