@@ -5,7 +5,7 @@ Raffle System
 @endsection
 
 @section('content')
-    <main class="main pb-5">
+    <main class="main">
         <div class="painel">
             <div class="container">
                 <div class="row">
@@ -35,14 +35,22 @@ Raffle System
                     <p>Desejamos que você tenha a melhor experiência possível.</p>
                 </div>
             </div>
-            <div class="mt-5 mb-3 d-flex justify-content-center bg-primary p-2">
-                <h3 class="text-white text-center">Confira as Rifas</h3>
+        </div>
+        <div class="mt-3 bg-light">
+            <div class="container pt-1">
+                <div id="raffles" class="mt-5 mb-3 d-flex justify-content-center bg-secondary p-2">
+                    <h3 class="text-white text-center">Confira as Rifas</h3>
+                </div>
+                <div class="row">
+                    @each(raffle in raffles)
+                        <div class="col-md-4 col-sm-4">
+                            <div class="card bg-dark text-white mb-3">
+                                <div class="card-header"> <p class="card-title">{{ raffle.title }}</p> </div>
+                            </div>
+                        </div>
+                    @endeach
+                </div>
             </div>
-            {{--  @each(raffle in raffles)  --}}
-                {{--  <div class="card mb-3">  --}}
-                    {{--  <div class="card-header"> {{ raffle.title }} </div>  --}}
-                {{--  </div>  --}}
-            {{--  @endeach  --}}
         </div>
     </main>
 @endsection
