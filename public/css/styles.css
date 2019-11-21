@@ -30,6 +30,10 @@ body {
     margin-top: 56px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .main {
     background-color: #333;
 }
@@ -40,7 +44,7 @@ body {
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.4)
         ),
-        url(../images/raffle_image.jpg);
+        url(../images/polygons.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

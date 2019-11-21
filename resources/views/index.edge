@@ -26,30 +26,32 @@ Raffle System
             </div>
             
             <div class="boxes mt-3">
-                <div class="bg-primary p-2 text-white text-center">
+                <div class="bg-secondary p-2 text-white text-center">
                     <h3>Se inscreva em qualquer rifa!</h3>
                     <p>Ao entrar no nosso gerenciador você pode se inscrever em qualquer rifa com o clique de um botão.</p>
                 </div>
-                <div class="bg-primary p-2 text-white text-center">
+                <div class="bg-secondary p-2 text-white text-center">
                     <h3>Sinta-se a vontade para explorar o nosso sistema!</h3>
                     <p>Desejamos que você tenha a melhor experiência possível.</p>
                 </div>
             </div>
         </div>
-        <div class="mt-3 bg-light">
+        <div class="mt-3 pb-3 bg-secondary">
             <div class="container pt-1">
-                <div id="raffles" class="mt-5 mb-3 d-flex justify-content-center bg-secondary p-2">
+                <div id="raffles" class="mt-5 mb-3 d-flex justify-content-center bg-dark p-2">
                     <h3 class="text-white text-center">Confira as Rifas</h3>
                 </div>
-                <div class="row">
-                    @each(raffle in raffles)
-                        <div class="col-md-4 col-sm-4">
-                            <div class="card bg-dark text-white mb-3">
-                                <div class="card-header"> <p class="card-title">{{ raffle.title }}</p> </div>
+                <ul class="list-group mt-3">
+                    <div class="row">
+                        @each(raffle in raffles)
+                            <div class="col-md-6 col-sm-6 mt-2">
+                                <a role="button" href="/raffles/{{ raffle.id }}">
+                                    <li class="list-group-item btn-outline-dark">{{ raffle.title }}</li>
+                                </a>
                             </div>
-                        </div>
-                    @endeach
-                </div>
+                        @endeach
+                    </div>
+                </ul>
             </div>
         </div>
     </main>
