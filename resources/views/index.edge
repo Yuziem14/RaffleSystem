@@ -41,17 +41,23 @@ Raffle System
                 <div id="raffles" class="mt-5 mb-3 d-flex justify-content-center bg-dark p-2">
                     <h3 class="text-white text-center">Confira as Rifas</h3>
                 </div>
-                <ul class="list-group mt-3">
-                    <div class="row">
-                        @each(raffle in raffles)
-                            <div class="col-md-6 col-sm-6 mt-2">
-                                <a role="button" href="/raffles/{{ raffle.id }}">
-                                    <li class="list-group-item btn-outline-dark">{{ raffle.title }}</li>
-                                </a>
-                            </div>
-                        @endeach
-                    </div>
-                </ul>
+                @if(raffles.length == 0)
+                    <h4 class="mt-3 text-center text-white">Não há rifas disponiveis no momento!</h4>
+                @else
+                    <ul class="list-group mt-3">
+                        <div class="row">
+                            @each(raffle in raffles)
+                                <div class="col-md-6 col-sm-12 mt-2">
+                                    <a role="button" href="/raffles/{{ raffle.id }}">
+                                        <li class="list-group-item btn-outline-dark d-flex justify-content-between flex-wrap">{{ raffle.title }}
+                                            <span class="badge badge-success p-2"> {{ raffle.availables + '/' + raffle.total + ' bilhetes disponiveis!' }}</span>
+                                        </li>
+                                    </a>
+                                </div>
+                            @endeach
+                        </div>
+                    </ul>
+                @endif
             </div>
         </div>
     </main>
