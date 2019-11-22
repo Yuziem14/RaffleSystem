@@ -4,10 +4,10 @@ const Raffle = use('App/Models/Raffle');
 class HomeController {
     async index({ view }) {
         const raffles = (await Raffle.all()).rows;
-        raffles.forEach( async raffle => {
+        for(const raffle of raffles) {
             raffle.total = await raffle.tickets().getCount();
-            raffle.availables = await raffle.tickets().where('user_id', null).getCount();
-        });
+            raffle.available_tickets = await raffle.tickets().where('user_id', null).getCount();
+        }
         return view.render('index', { raffles })
     }
 }

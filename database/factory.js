@@ -37,7 +37,6 @@ Factory.blueprint('App/Models/Raffle', async (faker) => {
     probable_raffle_date: endDate,
     start_date_sale: startDate,
     end_date_sale: endDate,
-    raffle_date: endDate,
     ticket_price: faker.floating({ fixed: 2, min: 0, max: 50 })
   }
 })
