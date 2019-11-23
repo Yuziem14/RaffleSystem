@@ -37,35 +37,37 @@
           <small class="form-text text-danger">{{ getErrorFor('name') }}</small>
         @endif
     </div>
-    <div class="form-group required">
-      <label for="password" class="required text-white">Senha <abbr title="required"></abbr></label>
-      <input
-        class="form-control required"
-        type="password"
-        required="required"
-        aria-required="true"
-        name="password"
-        id="password" />
-        @if(hasErrorFor('password'))
-          <small class="form-text text-danger">{{ getErrorFor('password') }}</small>
-        @endif
-    </div>
-    <div class="form-group required">
-      <label for="password_confirmation" class="required text-white">Confirme a Senha <abbr title="required"></abbr></label>
-      <input
-        class="form-control required"
-        type="password"
-        required="required"
-        aria-required="true"
-        name="password_confirmation"
-        id="password_confirmation" />
-        @if(hasErrorFor('password_confirmation'))
-          <small class="form-text text-danger">{{ getErrorFor('password_confirmation') }}</small>
-        @endif
+    <div class="row">
+      <div class="col-md-6 col-sm-12 form-group required">
+        <label for="password" class="required text-white">Senha <abbr title="required"></abbr></label>
+        <input
+          class="form-control required"
+          type="password"
+          required="required"
+          aria-required="true"
+          name="password"
+          id="password" />
+          @if(hasErrorFor('password'))
+            <small class="form-text text-danger">{{ getErrorFor('password') }}</small>
+          @endif
+      </div>
+      <div class="col-md-6 col-sm-12 form-group required">
+        <label for="password_confirmation" class="required text-white">Confirme a Senha <abbr title="required"></abbr></label>
+        <input
+          class="form-control required"
+          type="password"
+          required="required"
+          aria-required="true"
+          name="password_confirmation"
+          id="password_confirmation" />
+          @if(hasErrorFor('password_confirmation'))
+            <small class="form-text text-danger">{{ getErrorFor('password_confirmation') }}</small>
+          @endif
+      </div>
     </div>
   </div>
   <div class="form-actions btn-group mb-3 w-100">
-    <button type="submit" class="btn btn-success btn-block btn-lg mt-1">Registrar</button>q
+    <button type="submit" class="btn btn-success btn-block btn-lg mt-1">Registrar</button>
   </div>
 </form>
 {{--  @endsection  --}}

@@ -32,7 +32,7 @@ module.exports = {
   | Leave empty if you do not want any redirects.
   |
   */
-  registrationSuccessRedirectTo: "/auth/dashboard",
+  registrationSuccessRedirectTo: "/dashboard",
 
   /*
   |--------------------------------------------------------------------------
