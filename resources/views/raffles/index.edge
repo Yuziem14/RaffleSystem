@@ -1,0 +1,52 @@
+@layout('layouts.app')
+
+@section('view-title')
+Raffle System
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="container text-white pt-3">
+            @if(raffles.length == 0)
+                <h2 class="text-center">Não há rifas disponiveis!</h2>
+            @else
+                <div class="row">
+                    @each(raffle in raffles)
+                        <div class="col-md-4 col-sm-6 mb-2 d-flex align-items-strech">
+                            <div class="card text-dark">
+                                <h5 class="card-header d-flex justify-content-between flex-wrap">
+                                    <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
+                                    <span class="badge badge-success">
+                                        {{ raffle.available_tickets }} / {{ raffle.total }} 
+                                        <i class="fas fa-ticket-alt"></i> 
+                                    </span>
+                                </h5>
+                                <div class="card-body">
+                                    <p class="card-text">{{ raffle.description }}</p>
+                                    <p class="card-text">
+                                        Data do sorteio:
+                                        <span class="format-date badge badge-dark">{{ raffle.probable_raffle_date }}</span>
+                                    </p>
+                                    @if(raffle.raffle_date)
+                                        <p class="card-text">
+                                            Sorteado em:
+                                            <span class="format-date badge badge-primary">{{ raffle.raffle_date }}</span>
+                                        </p>
+                                    @endif
+                                </div>
+                                <div class="card-footer d-flex justify-content-between flex-wrap">
+                                    @if(raffle.end_date_sale > now && raffle.available_tickets > 0)
+                                        <p class="card-text font-weight-bold text-info btn mb-0">Á VENDA!</p>
+                                        <a href="{{ route('raffles.show', { id: raffle.id } ) + '/#tickets' }}" class="btn btn-outline-primary">Comprar</a>
+                                    @else
+                                        <p class="card-text font-weight-bold text-danger btn mb-0">BILHETES ESGOTADOS!</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endeach
+                </div>
+            @endif
+        </div>
+    </main>
+@endsection

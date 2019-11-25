@@ -1,0 +1,93 @@
+@layout('layouts.app')
+
+@section('view-title')
+    RaffleSystem
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="bg-light p-2">
+            <div class="container">
+                <h2 class="text-center text-muted">{{ raffle.title }}</h2>
+            </div>
+        </div>
+        <div class="container pt-2 pb-3">
+            <div class="row d-flex flex-column align-items-center">
+                <div class="col-md-10 col-sm-12">
+                    <div class="side-component text-white p-3">
+                        <h5 class="text-justify mb-5">{{ raffle.description }}</h5>
+                        <p>
+                            Data prevista para o sorteio: 
+                            <span class="format-date badge badge-light p-1">
+                                {{ raffle.probable_raffle_date }}
+                            </span>
+                        </p>
+                        @if(raffle.raffle_date)
+                            <p>
+                                Sorteado em:
+                                <span class="format-date badge badge-primary">{{ raffle.raffle_date }}</span>
+                            </p>
+                        @endif
+                        <p>
+                            Vendas do dia 
+                            <span class="format-date badge badge-primary">{{ raffle.start_date_sale }}</span>
+                            ao dia
+                            <span class="format-date badge badge-primary">{{ raffle.end_date_sale }}</span>
+                        </p>
+                        <p>Valor do Bilhete: <span class="badge badge-warning p-1">R$ {{ raffle.ticket_price }}</span></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 mt-3">
+                            <div class="card" id="tickets">
+                                <h5 class="card-header text-center mb-0">Bilhetes <i class="fas fa-ticket-alt"></i></h5>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        @each(ticket in raffle.getRelated('tickets').rows)
+                                            @if(!ticket.user_id)
+                                                @set('color', 'warning')
+                                                @set('icon', 'shopping-cart')
+                                            @elseif(ticket.user_id == auth.user.id)
+                                                @set('color', 'success')
+                                                @set('icon', 'check-circle')
+                                            @else
+                                                @set('color', 'danger')
+                                                @set('icon', 'times-circle')
+                                            @endif
+                                            <li class="list-group-item bg-{{ color }} text-white d-flex justify-content-between flex-wrap">
+                                                <h6>{{ ticket.number }}</h6>
+                                                <a href="/" class="btn btn-dark"><i class="fas fa-{{icon}}"></i></a>
+                                            </li>
+                                        @endeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-3">
+                            <div class="card" id="awards">
+                                <h5 class="card-header text-center mb-0">Premios <i class="fas fa-trophy"></i></h5>
+                                <div class="card-body table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Premio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @each(award in raffle.getRelated('awards').rows)
+                                                <tr class="bg-warning">
+                                                    <td>{{ award.placing }}</td>
+                                                    <td>{{ award.description }}</td>
+                                                </tr>
+                                            @endeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection

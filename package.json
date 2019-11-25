@@ -5,8 +5,10 @@
   "description": "The fullstack application boilerplate for Adonisjs",
   "main": "index.js",
   "scripts": {
-    "config": "cp .env.example .env && adonis key:generate && npm install",
+    "config": "cp .env.example .env && adonis key:generate && npm install && npm run build-dev",
     "config-adonis": "npm i -g @adonisjs/cli && npm run config",
+    "build": "./node_modules/.bin/webpack --mode production",
+    "build-dev": "./node_modules/.bin/webpack --mode development",
     "start": "node server.js",
     "test": "node ace test"
   },
@@ -35,7 +37,17 @@
     "mysql": "^2.17.1"
   },
   "devDependencies": {
-    "adonis-auth-scaffold": "^1.2.0"
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "adonis-auth-scaffold": "^1.2.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "autoload": {
     "App": "./app"

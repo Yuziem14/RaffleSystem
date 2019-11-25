@@ -20,3 +20,4 @@ require('./authRoutes.js');
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index').as('home')
+Route.resource('raffles', 'RaffleController');
