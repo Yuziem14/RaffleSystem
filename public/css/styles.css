@@ -52,13 +52,13 @@ a:hover {
     background-repeat: no-repeat;
 }
 
-.side-component {
+.shadow-box {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     border-top: solid 4px #00a8ff;
 }
 
-.side-component--animation {
+.shadow-box--animation {
     animation: slideinTop 2s;
 }
 
@@ -78,6 +78,10 @@ a:hover {
 
 .image_icons {
     width: 40%;
+}
+
+.user__profile-photo {
+    width: 30%;
 }
 
 @media screen and (max-width: 575px) {

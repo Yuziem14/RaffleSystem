@@ -3,10 +3,18 @@
 Dashboard
 @endsection
 @section('content')
-  <div class="container pt-3">
-    <div class="alert alert-success">
-        Signed in as <strong>{{ auth.user.name }}</strong>
-        <a href="{{ Config.get('adonis-auth-scaffold.logoutRoute') }}" class="btn btn-danger btn-sm">Logout</a>
+  <main class="main">
+    <div class="container pt-3">
+      <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-8 col-sm-12 shadow-box text-white d-flex flex-column align-items-center p-5">
+          <img src="images/avatar.svg" alt="Profile Photo" class="user__profile-photo">
+          <h3 class="mt-3">Yuri Ziemba</h3>
+        </div>
+      </div>
+      <div class="alert alert-success">
+          Signed in as <strong>{{ auth.user.name }}</strong>
+          <a href="{{ Config.get('adonis-auth-scaffold.logoutRoute') }}" class="btn btn-danger btn-sm">Logout</a>
+      </div>
     </div>
-  </div>
+  </main>
 @endsection

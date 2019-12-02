@@ -6,7 +6,7 @@ Login
   <main class="main">
     <div class="pt-2 container text-white flex-column d-flex align-items-center">
       <form action="{{ Config.get('adonis-auth-scaffold.loginRoute') }}" method="post" 
-      class="side-component p-5 auth-form col-md-6 col-sm-8">
+      class="shadow-box p-5 auth-form col-md-6 col-sm-8">
         <input name="_csrf" type="hidden" value="{{ csrfToken }}" />
         <div class="text-center mt-2 mb-2">
           <img src="/images/avatar.svg" class="image_icons">

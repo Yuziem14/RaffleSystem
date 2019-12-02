@@ -7,7 +7,7 @@ const Hash = use('Hash')
 const Model = use('Model')
 
 class User extends Model {
-  static boot () {
+  static boot() {
     super.boot()
 
     /**
@@ -31,16 +31,20 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens () {
+  tokens() {
     return this.hasMany('App/Models/Token')
   }
 
-  raffles () {
+  raffles() {
     return this.hasMany('App/Models/Raffle')
   }
 
-  tickets () {
-    return this.hasMany('App/Modles/Ticket')
+  boughtRaffles() {
+    return this.manyThrough('App/Models/Ticket', 'raffle');
+  }
+
+  tickets() {
+    return this.hasMany('App/Models/Ticket')
   }
 }
 
