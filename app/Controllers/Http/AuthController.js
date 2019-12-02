@@ -80,8 +80,23 @@ class AuthController {
     return view.render("auth.password-reset", { token });
   }
 
-  getAuthDashboard({ request, response, view }) {
-    return view.render("auth.dashboard");
+  getAuthDashboard({ request, response, view, auth }) {
+    const { user } = auth;
+
+    const myRaffles = (await user.raffles().fetch()).rows;
+    const boughtRaffles = (await user.boughtRaffles().distinct('raffles.id').fetch()).rows;
+
+    for(const raffle of boughtRaffles) {
+      raffle.totalTicketsBought = (await user.tickets().where('raffle_id', raffle.id).count('* as total'))[0].total;
+
+      raffle.totalValue = raffle.totalTicketsBought * raffle.ticket_price;
+
+      raffle.generalTicketsBought = (await raffle.tickets().whereNotNull('user_id').count('* as total'))[0].total;
+
+      raffle.totalTickets = (await raffle.tickets().count('* as total'))[0].total;
+    }
+
+    return view.render("auth.dashboard", { myRaffles, boughtRaffles });
   }
 
   getLogout({ response, session }) {
