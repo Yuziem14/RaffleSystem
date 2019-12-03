@@ -19,7 +19,12 @@ require('./authRoutes.js');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', 'HomeController.index').as('home')
+Route.get('/', 'HomeController.index').as('home').middleware('redirectAuth')
+Route.get('dashboard', 'HomeController.dashboard').as('dashboard').middleware('auth');
 
-Route.resource('raffles', 'RaffleController');
-Route.post('raffles/:id/awards', 'RaffleController.storeAward').as('awards.store')
+Route.resource('raffles', 'RaffleController')
+.middleware(
+    new Map([[['create', 'store', 'edit', 'update', 'destroy'],['auth']]]));
+
+Route.post('raffles/:id/awards', 'RaffleController.storeAward').as('awards.store').middleware('auth')
+Route.get('raffes/:raffle/buy/:id', 'RaffleController.buy').as('raffles.buy').middleware('auth')

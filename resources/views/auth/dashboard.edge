@@ -21,15 +21,15 @@ Dashboard
             <a href="{{ route('raffles.create') }}" class="btn btn-outline-success">Nova Rifa <i class="fas fa-plus-circle"></i></a>
           </div>
             @if(myRaffles.length < 1)
-              <h4 class="text-white text-center">Você não esta participando de nenhuma rifa!</h4>
+              <h4 class="text-white text-center">Você não possui nenhuma rifa!</h4>
             @else
               @each(raffle in myRaffles)
                 <div class="card text-dark mb-3">
                   <h5 class="card-header d-flex justify-content-between flex-wrap">
                       <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
                       <span class="badge badge-success">
-                          {{ raffle.available_tickets }} / {{ raffle.totalTickets }} 
-                          <i class="fas fa-ticket-alt"></i> 
+                          {{ raffle.available_tickets }} / {{ raffle.totalTickets }}
+                          <i class="fas fa-ticket-alt"></i>
                       </span>
                   </h5>
                   <div class="card-body">
@@ -44,7 +44,7 @@ Dashboard
                       </p>
                       <p class="card-text">
                           Valor total arrecadado:
-                          <span class="badge badge-warning">R$ {{ raffle.amountRaised }}</span>
+                          <span class="badge badge-warning">R$ {{ raffle.amountRaised.toFixed(2) }}</span>
                       </p>
                       @if(raffle.raffle_date)
                           <p class="card-text">
@@ -54,7 +54,7 @@ Dashboard
                       @endif
                   </div>
                 <div class="card-footer d-flex justify-content-between flex-wrap">
-                    @if(raffle.end_date_sale > now)
+                    @if(now > raffle.start_date_sale && raffle.end_date_sale > now)
                       @if(raffle.available_tickets > 0)
                         <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
                       @else
@@ -84,7 +84,7 @@ Dashboard
                   <h5 class="card-header d-flex justify-content-between flex-wrap">
                     <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
                     <span class="badge badge-success">
-                      {{ raffle.available_tickets }} / {{ raffle.totalTickets }} ({{ raffle.totalTicketsBought }}) 
+                      {{ raffle.available_tickets }} / {{ raffle.totalTickets }} ({{ raffle.totalTicketsBought }})
                       <i class="fas fa-ticket-alt"></i>
                     </span>
                   </h5>
@@ -103,7 +103,7 @@ Dashboard
                     </p>
                     <p class="card-text">
                         Valor total investido:
-                        <span class="badge badge-warning">R$ {{ raffle.amountInvested }}</span>
+                        <span class="badge badge-warning">R$ {{ raffle.amountInvested.toFixed(2) }}</span>
                     </p>
                     @if(raffle.raffle_date)
                         <p class="card-text">

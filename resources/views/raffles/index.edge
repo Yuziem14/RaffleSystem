@@ -35,11 +35,15 @@ Raffle System
                                     @endif
                                 </div>
                                 <div class="card-footer d-flex justify-content-between flex-wrap">
-                                    @if(raffle.end_date_sale > now && raffle.available_tickets > 0)
-                                        <p class="card-text font-weight-bold text-info btn mb-0">Á VENDA!</p>
-                                        <a href="{{ route('raffles.show', { id: raffle.id } ) + '/#tickets' }}" class="btn btn-outline-primary">Comprar</a>
+                                    @if(now > raffle.start_date_sale && raffle.end_date_sale > now)
+                                        @if(raffle.available_tickets > 0)
+                                            <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
+                                            <a href="{{ route('raffles.show', { id: raffle.id } ) + '/#tickets' }}" class="btn btn-outline-primary">Comprar</a>
+                                        @else
+                                            <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
+                                        @endif
                                     @else
-                                        <p class="card-text font-weight-bold text-danger btn mb-0">BILHETES ESGOTADOS!</p>
+                                        <p class="card-text font-weight-bold text-danger mb-0">PERÍODO DE VENDA ESGOTADO!</p>
                                     @endif
                                 </div>
                             </div>

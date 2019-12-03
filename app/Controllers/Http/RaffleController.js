@@ -130,6 +130,20 @@ class RaffleController {
 
     response.route('raffles.show', { id: raffle.id });
   }
+
+  async buy({ params, request, response, auth }){
+    const raffle = await Raffle.find(params.raffle);
+    const ticket = (await raffle.tickets().where('id', params.id).fetch()).rows[0];
+    if(ticket.user_id == auth.user.id) {
+      ticket.user_id = null;
+    } else if(!ticket.user_id) {
+      ticket.user_id = auth.user.id;
+    }
+
+    await raffle.tickets().save(ticket);
+
+    response.route('raffles.show', {id: raffle.id })
+  }
 }
 
 module.exports = RaffleController

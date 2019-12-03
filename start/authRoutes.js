@@ -18,18 +18,14 @@ const Config = use("Config");
 const Route = use("Route");
 const loginRoute = Config.get("adonis-auth-scaffold.loginRoute");
 const registerRoute = Config.get("adonis-auth-scaffold.registrationRoute");
-const registrationSuccessRoute = Config.get("adonis-auth-scaffold.registrationSuccessRedirectTo");
 const passwordResetRoute = Config.get(
   "adonis-auth-scaffold.passwordResetRoute"
 );
 const logoutRoute = Config.get("adonis-auth-scaffold.logoutRoute");
 
 Route.post(loginRoute, "AuthController.login").middleware('guest');
-Route.post(registerRoute, "AuthController.register");
-Route.post(passwordResetRoute, "AuthController.forgotPassword");
-
-Route.get(registerRoute, "AuthController.getRegister");
-Route.get(loginRoute, "AuthController.getLogin");
-Route.get(passwordResetRoute, "AuthController.getResetPassword");
+Route.post(registerRoute, "AuthController.register")
+Route.post(passwordResetRoute, "AuthController.forgotPassword")
+Route.get(loginRoute, "AuthController.getLogin").middleware('redirectAuth');
+Route.get(passwordResetRoute, "AuthController.getResetPassword").middleware('redirectAuth');
 Route.get(logoutRoute, "AuthController.getLogout");
-Route.get(registrationSuccessRoute, "AuthController.getAuthDashboard");

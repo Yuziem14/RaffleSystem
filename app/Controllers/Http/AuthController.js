@@ -2,7 +2,6 @@
 
 const Persona = use("Persona");
 const Config = use("Config");
-const moment = require('moment');
 
 const { validate } = use("Validator");
 
@@ -39,7 +38,7 @@ class AuthController {
 
     // optional
     await auth.login(user);
-    response.redirect(Config.get("adonis-auth-scaffold.registrationSuccessRedirectTo"));
+    response.redirect('dashboard');
   }
 
   async forgotPassword({ request, response, session, auth }) {
@@ -80,46 +79,6 @@ class AuthController {
   getResetPassword({ request, response, view, params }) {
     const token = request.input('token');
     return view.render("auth.password-reset", { token });
-  }
-
-  async getAuthDashboard({ request, response, view, auth }) {
-    const { user } = auth;
-    const now = moment(new Date(), "DD/MM/YYYY HH:mm:ss");
-
-    const myRaffles = (await user.raffles().fetch()).rows;
-    const boughtRaffles = (await user.boughtRaffles().distinct('raffles.id').fetch()).rows;
-
-    for (const raffle of myRaffles) {
-      raffle.totalTickets = await raffle.tickets().getCount();
-
-      raffle.available_tickets = await raffle.tickets().where('user_id', null).getCount();
-
-      raffle.amountRaised = (raffle.totalTickets - raffle.available_tickets) * raffle.ticket_price;
-
-      raffle.totalParticipants = (await raffle.tickets().distinct('user_id').whereNotNull('user_id').fetch()).rows.length;
-
-      const probableRaffleDate = moment(raffle.probable_raffle_date, "DD/MM/YYYY HH:mm:ss");
-      raffle.days = probableRaffleDate.diff(now, 'days');
-    }
-
-    for (const raffle of boughtRaffles) {
-      await raffle.load('user');
-
-      raffle.totalTickets = (await raffle.tickets().count('* as total'))[0].total;
-
-      raffle.available_tickets = await raffle.tickets().where('user_id', null).getCount();
-
-      raffle.totalTicketsBought = (await user.tickets().where('raffle_id', raffle.id).count('* as total'))[0].total;
-
-      raffle.amountInvested = raffle.totalTicketsBought * raffle.ticket_price;
-
-      raffle.totalParticipants = (await raffle.tickets().distinct('user_id').whereNotNull('user_id').fetch()).rows.length;
-
-      const probableRaffleDate = moment(raffle.probable_raffle_date, "DD/MM/YYYY HH:mm:ss");
-      raffle.days = probableRaffleDate.diff(now, 'days');
-    }
-
-    return view.render("auth.dashboard", { myRaffles, boughtRaffles, now });
   }
 
   getLogout({ response, session }) {
