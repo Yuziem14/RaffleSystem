@@ -100,8 +100,7 @@ class RaffleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {
-  }
+  async update({ params, request, response }) { }
 
   /**
    * Delete a raffle with id.
@@ -112,6 +111,24 @@ class RaffleController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {
+  }
+
+  /**
+   * Store a new award for raffle
+   * POST raffles/:id/awards
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async storeAward({ params, request, response }) {
+    const raffle = await Raffle.find(params.id);
+    const awardData = request.only(['description']);
+    awardData.placing = (await raffle.awards().getMax('placing')) + 1;
+
+    await raffle.awards().create(awardData);
+
+    response.route('raffles.show', { id: raffle.id });
   }
 }
 

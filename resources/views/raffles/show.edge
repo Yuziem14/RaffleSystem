@@ -36,6 +36,7 @@
                         </p>
                         <p>Valor do Bilhete: <span class="badge badge-warning p-1">R$ {{ raffle.ticket_price }}</span></p>
                     </div>
+                    {{--                      
                     @loggedIn
                         @if(raffle.user_id == auth.user.id)
                             <div class="mt-3">
@@ -43,7 +44,7 @@
                                 <a href="{{ route('/') }}" class="btn btn-outline-danger btn-block">Excluir <i class="fas fa-trash"></i></a>
                             </div>
                         @endif
-                    @endloggedIn
+                    @endloggedIn  --}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mt-3">
                             @set('scroll', '')
@@ -96,6 +97,18 @@
                                     </table>
                                 </div>
                             </div>
+                            @loggedIn
+                                @if(auth.user.id == raffle.user_id)
+                                    <form action="{{ route('awards.store', { id: raffle.id }) }}" method="POST" class="mt-3">
+                                        {{ csrfField() }}
+                                        <div class="form-group">
+                                            <label class="text-white" for="description">Descricao</label>
+                                            <input class="form-control" id="description" name="description">
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary btn-block mt-3">Adicionar Premio <i class="fas fa-plus-circle"></i></button>
+                                    </form>
+                                @endif
+                            @endloggedIn
                         </div>
                     </div>
                 </div>

@@ -20,4 +20,6 @@ require('./authRoutes.js');
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index').as('home')
+
 Route.resource('raffles', 'RaffleController');
+Route.post('raffles/:id/awards', 'RaffleController.storeAward').as('awards.store')
