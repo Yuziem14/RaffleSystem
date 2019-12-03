@@ -14,6 +14,3 @@ database/*.sqlite
 # VSCode & Webstorm history directories
 .history
 .idea
-
-#WebPack Build Files / Assets
-public/js/

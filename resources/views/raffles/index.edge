@@ -12,8 +12,8 @@ Raffle System
             @else
                 <div class="row">
                     @each(raffle in raffles)
-                        <div class="col-md-4 col-sm-6 mb-2 d-flex align-items-strech">
-                            <div class="card text-dark">
+                        <div class="col-md-4 col-sm-6 mb-2 d-flex align-content-stretch flex-wrap">
+                            <div class="card text-dark w-100">
                                 <h5 class="card-header d-flex justify-content-between flex-wrap">
                                     <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
                                     <span class="badge badge-success">

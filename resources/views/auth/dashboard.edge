@@ -2,17 +2,124 @@
 @section('view-title')
 Dashboard
 @endsection
+
 @section('content')
   <main class="main">
     <div class="container pt-3">
-      <div class="row d-flex justify-content-center mb-3">
-        <div class="col-md-8 col-sm-12 shadow-box text-white d-flex flex-column align-items-center p-5">
+      <div class="row d-flex justify-content-center shadow-box text-white mb-3 p-5">
+        <div class="col-md-8 col-sm-12 d-flex flex-column align-items-center">
           <img src="images/avatar.svg" alt="Profile Photo" class="user__profile-photo">
           <h3 class="mt-3"><strong>{{ auth.user.name }}</strong></h3>
-          <div class="col-md-6 col-sm-12">
-            
+          <h6 class="text-success">Mantendo {{ myRaffles.length }} rifas!</h6>
+          <h6 class="text-success">Participando de {{ boughtRaffles.length }} rifas!</h6>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center text-white">
+        <div class="col-md-6 col-sm-12">
+          <div class="d-flex flex-column align-items-center mb-3">
+            <h2 class="text-center">Minhas Rifas</h2>
+            <a href="{{ route('raffles.create') }}" class="btn btn-outline-success">Nova Rifa <i class="fas fa-plus-circle"></i></a>
           </div>
-          <div class="col-md-6 col-sm-12"></div>
+            @if(myRaffles.length < 1)
+              <h4 class="text-white text-center">Você não esta participando de nenhuma rifa!</h4>
+            @else
+              @each(raffle in myRaffles)
+                <div class="card text-dark mb-3">
+                  <h5 class="card-header d-flex justify-content-between flex-wrap">
+                      <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
+                      <span class="badge badge-success">
+                          {{ raffle.available_tickets }} / {{ raffle.totalTickets }} 
+                          <i class="fas fa-ticket-alt"></i> 
+                      </span>
+                  </h5>
+                  <div class="card-body">
+                      <p class="card-text">{{ raffle.description }}</p>
+                      <p class="card-text">
+                          Data do sorteio:
+                          <span class="format-date badge badge-dark">{{ raffle.probable_raffle_date }}</span>
+                      </p>
+                      <p class="card-text">
+                          Nº de Participantes:
+                          <span class="badge badge-dark">{{ raffle.totalParticipants }}</span>
+                      </p>
+                      <p class="card-text">
+                          Valor total arrecadado:
+                          <span class="badge badge-warning">R$ {{ raffle.amountRaised }}</span>
+                      </p>
+                      @if(raffle.raffle_date)
+                          <p class="card-text">
+                              Sorteado em:
+                              <span class="format-date badge badge-primary">{{ raffle.raffle_date }}</span>
+                          </p>
+                      @endif
+                  </div>
+                <div class="card-footer d-flex justify-content-between flex-wrap">
+                    @if(raffle.end_date_sale > now && raffle.available_tickets > 0)
+                        <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
+                    @else
+                        <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
+                    @endif
+                    
+                    @if(raffle.end_date_sale > now)
+                      <p class="card-text font-weight-bold">Restam {{ raffle.days }} dias para o sorteio</p>
+                    @endif
+                </div>
+              </div>
+            @endeach
+          @endif
+        </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="d-flex flex-column align-items-center mb-3">
+              <h2 class="text-center">Participando</h2>
+              <a href="{{ route('raffles.index') }}" class="btn btn-outline-primary">Outras Rifas <i class="fas fa-dice-d6"></i></a>
+            </div>
+              @if(boughtRaffles.length < 1)
+              <h4 class="text-white text-center">Você não esta participando de nenhuma rifa!</h4>
+            @else
+              @each(raffle in boughtRaffles)
+                <div class="card text-dark mb-3">
+                  <h5 class="card-header d-flex justify-content-between flex-wrap">
+                    <a href="{{ route('raffles.show', { id: raffle.id }) }}" class="text-muted">{{ raffle.title }}</a>
+                    <span class="badge badge-success">
+                      {{ raffle.available_tickets }} / {{ raffle.totalTickets }} ({{ raffle.totalTicketsBought }}) 
+                      <i class="fas fa-ticket-alt"></i>
+                    </span>
+                  </h5>
+                  <div class="card-body">
+                    <p class="card-text">{{ raffle.description }}</p>
+                    <p class="card-text">
+                        Data do sorteio:
+                        <span class="format-date badge badge-dark">{{ raffle.probable_raffle_date }}</span>
+                        @if(raffle.end_date_sale > now)
+                          <p class="card-text font-weight-bold">(Restam {{ raffle.days }} dias para o sorteio)</p>
+                        @endif
+                    </p>
+                    <p class="card-text">
+                        Nº de Participantes:
+                        <span class="badge badge-dark">{{ raffle.totalParticipants }}</span>
+                    </p>
+                    <p class="card-text">
+                        Valor total investido:
+                        <span class="badge badge-warning">R$ {{ raffle.amountInvested }}</span>
+                    </p>
+                    @if(raffle.raffle_date)
+                        <p class="card-text">
+                            Sorteado em:
+                            <span class="format-date badge badge-primary">{{ raffle.raffle_date }}</span>
+                        </p>
+                    @endif
+                  </div>
+                  <div class="card-footer d-flex justify-content-between flex-wrap">
+                    @if(raffle.end_date_sale > now && raffle.available_tickets > 0)
+                        <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
+                        <a href="{{ route('raffles.show', { id: raffle.id } ) + '/#tickets' }}" class="btn btn-outline-primary">Comprar</a>
+                    @else
+                        <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
+                    @endif
+                  </div>
+                </div>
+              @endeach
+            @endif
         </div>
       </div>
     </div>

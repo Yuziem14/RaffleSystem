@@ -81,7 +81,12 @@ a:hover {
 }
 
 .user__profile-photo {
-    width: 30%;
+    width: 40%;
+}
+
+.scroll-box {
+    height: 50vh;
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 575px) {

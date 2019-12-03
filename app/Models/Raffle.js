@@ -4,6 +4,12 @@
 const Model = use('Model')
 
 class Raffle extends Model {
+    static boot() {
+        super.boot()
+
+        this.addHook('afterCreate', 'RaffleHook.generateTickets')
+    }
+
     user() {
         return this.belongsTo('App/Models/User');
     }
@@ -26,7 +32,7 @@ class Raffle extends Model {
     }
 
     static castDates(field, value) {
-        if (this.dates.includes(field) || fied == 'any_date')
+        if (this.dates.includes(field))
             return value.format('DD/MM/YYYY hh:mm')
     }
 

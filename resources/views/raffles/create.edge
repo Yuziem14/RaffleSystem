@@ -1,0 +1,19 @@
+@layout('layouts.app')
+
+@section('view-title')
+RaffleSystem
+@endsection
+
+@section('content')
+    <main class="main pb-3">
+        <div class="container pt-3">
+            <a href="/dashboard" class="btn btn-outline-light mb-3"><i class="fas fa-arrow-left"></i> Voltar</a>
+            <div class="row d-flex justify-content-center shadow-box text-white p-5">
+                <div class="col-md-10 col-sm-12">
+                    <h2 class="text-center">Adicionar Rifa <i class="fas fa-dice-d6"></i></h2>
+                    @include('raffles.form')
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection

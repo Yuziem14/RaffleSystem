@@ -38,7 +38,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mt-3">
-                            <div class="card" id="tickets">
+                            @set('scroll', '')
+                            @if(raffle.getRelated('tickets').rows.length > 100)
+                                @set('scroll', 'scroll-box')
+                            @endif
+                            <div class="card {{ scroll }}" id="tickets">
                                 <h5 class="card-header text-center mb-0">Bilhetes <i class="fas fa-ticket-alt"></i></h5>
                                 <div class="card-body">
                                     <ul class="list-group">

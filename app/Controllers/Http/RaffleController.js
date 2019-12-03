@@ -34,6 +34,7 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async create({ request, response, view }) {
+    return view.render('raffles.create');
   }
 
   /**
@@ -44,7 +45,18 @@ class RaffleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {
+  async store({ request, response, auth }) {
+    const { user } = auth;
+
+    const raffleData = request.except(['_csrf', 'main_award']);
+    raffleData.user_id = user.id;
+    const raffle = await Raffle.create(raffleData);
+
+    const award = { placing: 1, description: request.input('main_award') };
+
+    await raffle.awards().create(award);
+
+    response.route('raffles.show', { id: raffle.id });
   }
 
   /**
