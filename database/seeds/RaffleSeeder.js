@@ -17,6 +17,7 @@ const AwardSeeder = require('./AwardSeeder');
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
 const User = use('App/Models/User')
+const Raffle = use('App/Models/Raffle')
 
 class RaffleSeeder {
   static async run(number, users) {

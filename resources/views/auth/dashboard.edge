@@ -54,13 +54,16 @@ Dashboard
                       @endif
                   </div>
                 <div class="card-footer d-flex justify-content-between flex-wrap">
-                    @if(raffle.end_date_sale > now && raffle.available_tickets > 0)
-                        <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
-                    @else
-                        <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
-                    @endif
-                    
                     @if(raffle.end_date_sale > now)
+                      @if(raffle.available_tickets > 0)
+                        <p class="card-text font-weight-bold text-info mb-0 pr-2">Á VENDA!</p>
+                      @else
+                        <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
+                      @endif
+                    @else
+                      <p class="card-text font-weight-bold text-danger mb-0">PERÍODO DE VENDA ESGOTADO!</p>
+                    @endif
+                    @if(raffle.probable_raffle_date > now)
                       <p class="card-text font-weight-bold">Restam {{ raffle.days }} dias para o sorteio</p>
                     @endif
                 </div>
@@ -90,7 +93,7 @@ Dashboard
                     <p class="card-text">
                         Data do sorteio:
                         <span class="format-date badge badge-dark">{{ raffle.probable_raffle_date }}</span>
-                        @if(raffle.end_date_sale > now)
+                        @if(raffle.probable_raffle_date > now)
                           <p class="card-text font-weight-bold">(Restam {{ raffle.days }} dias para o sorteio)</p>
                         @endif
                     </p>

@@ -85,6 +85,11 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async edit({ params, request, response, view }) {
+    const { id } = params;
+    const raffle = await Raffle.find(id);
+    await raffle.load('awards');
+
+    return view.render('raffles.edit', { raffle });
   }
 
   /**

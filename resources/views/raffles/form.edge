@@ -12,7 +12,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="form-group">
                 <label for="probable_raffle_date">Previsão para sorteio</label>
-                <input type="datetime-local" class="form-control" id="probable_raffle_date" value="{{ raffle.probable_raffle_date || '' }} name="probable_raffle_date">
+                <input type="datetime-local" class="form-control" id="probable_raffle_date" value="{{ raffle.probable_raffle_date || '' }}" name="probable_raffle_date">
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -37,6 +37,8 @@
             <label for="main_award">Premio #1:</label>
             <input type="text" min="0" class="form-control" id="main_award" name="main_award">
         </div>
+    @else
+        <a href="{{ route('/') }}" class="btn btn-outline-primary btn-block">Editar premios <i class="fas fa-edit"></i></a>
     @endif
     <button type="submit" class="btn btn-outline-success btn-lg btn-block">Salvar</button>
 </form>
