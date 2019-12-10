@@ -25,7 +25,6 @@ class TypeController {
       type.raffle_count = await type.raffles().getCount();
     }
 
-    console.log(types);
     return view.render('types.index', { types })
   }
 
