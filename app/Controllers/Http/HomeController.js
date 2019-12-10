@@ -46,6 +46,9 @@ class HomeController {
         raffle.days = probableRaffleDate.diff(now, 'days');
         }
 
+        console.log(myRaffles);
+        console.log(boughtRaffles);
+
         return view.render("auth.dashboard", { myRaffles, boughtRaffles, now });
     }
 }

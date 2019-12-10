@@ -36,8 +36,11 @@ Raffle System
                                      </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between flex-wrap">
-                                    @if(type.raffles_count == 0)
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    @if(type.raffle_count < 1)
+                                        <form method="POST" action="{{ route('types.destroy', { id: type.id }) + '?_method=DELETE' }}">
+                                            {{ csrfField() }}
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     @else
                                         <p class="card-text font-weight-bold text-danger mb-0">Há rifas com esse tipo!</p>
                                     @endif

@@ -25,6 +25,7 @@ class TypeController {
       type.raffle_count = await type.raffles().getCount();
     }
 
+    console.log(types);
     return view.render('types.index', { types })
   }
 
@@ -105,6 +106,12 @@ class TypeController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {
+    const { id } = params;
+    const type = await Type.find(id);
+
+    await type.delete();
+
+    response.route('types.index');
   }
 }
 

@@ -106,6 +106,9 @@
                                         <div class="form-group">
                                             <label class="text-white" for="description">Descricao</label>
                                             <input class="form-control" id="description" name="description">
+                                            @if(hasErrorFor('description'))
+                                                <small class="form-text text-danger">{{ getErrorFor('description') }}</small>
+                                            @endif
                                         </div>
                                         <button type="submit" class="btn btn-outline-primary btn-block mt-3">Adicionar Premio <i class="fas fa-plus-circle"></i></button>
                                     </form>
