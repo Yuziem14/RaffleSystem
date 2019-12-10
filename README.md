@@ -2,7 +2,7 @@
 
 Full Aplication Build with AdonisJS
 
-##Set up
+## Set up
 
 ```
 npm run config
