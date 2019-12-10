@@ -1,0 +1,52 @@
+@layout('layouts.app')
+
+@section('view-title')
+Raffle System
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="container text-white pt-3">
+            <div class="d-flex flex-column align-items-center mb-3">
+                <h2 class="text-center">Tipos Disponiveis</h2>
+                <a href="{{ route('types.create') }}" class="btn btn-outline-success">Adicionar Tipo <i class="fas fa-plus-circle"></i></a>
+            </div>
+            @if(types.length == 0)
+                <h2 class="text-center">Não há tipos disponiveis!</h2>
+            @else
+                <div class="row">
+                    @each(type in types)
+                        <div class="col-md-4 col-sm-6 mb-2 d-flex align-content-stretch flex-wrap">
+                            <div class="card text-dark w-100">
+                                <h5 class="card-header d-flex justify-content-between flex-wrap">
+                                    <a href="{{ route('types.show', { id: type.id }) }}" class="text-muted">{{ type.description }}</a>
+                                </h5>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Primeiro Número: 
+                                        <span class="badge badge-dark">{{ type.first_number }}</span>
+                                    </p>
+                                    <p class="card-text">
+                                       Passo: 
+                                        <span class="badge badge-primary">{{ type.step }}</span>
+                                    </p>
+                                    <p class="card-text">
+                                        Quantidade de bilhetes: 
+                                         <span class="badge badge-primary">{{ type.tickets_amount }}</span>
+                                     </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between flex-wrap">
+                                    @if(type.raffles_count == 0)
+                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    @else
+                                        <p class="card-text font-weight-bold text-danger mb-0">Há rifas com esse tipo!</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endeach
+                </div>
+            @endif
+        </div>
+    </main>
+@endsection

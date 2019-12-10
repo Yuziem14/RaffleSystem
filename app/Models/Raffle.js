@@ -22,6 +22,10 @@ class Raffle extends Model {
         return this.hasMany('App/Models/Award');
     }
 
+    type() {
+        return this.belongsTo('App/Models/Type');
+    }
+
     static get dates() {
         return super.dates.concat([
             'probable_raffle_date',

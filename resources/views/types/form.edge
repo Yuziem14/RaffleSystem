@@ -1,0 +1,32 @@
+<form action="{{ type.id ? route('types.update', { id: type.id }) + '?_method=PUT' : route('types.store') }}" method="POST">
+    {{ csrfField() }}
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <input type="text" class="form-control" id="description" value="{{ old('description', type.description || '') }}" name="description">
+        @if(hasErrorFor('description'))
+            <small class="form-text text-danger">{{ getErrorFor('description') }}</small>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="first_number">Primeiro Número</label>
+        <input type="number" min="0" step="1" class="form-control" value="{{ old('first_number', type.first_number || '') }}" id="first_number" name="first_number">
+        @if(hasErrorFor('first_number'))
+            <small class="form-text text-danger">{{ getErrorFor('first_number') }}</small>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="step">Passo: </label>
+        <input type="number" min="1" step="1" class="form-control" value="{{ old('step', type.step || '') }}" id="step" name="step">
+        @if(hasErrorFor('step'))
+            <small class="form-text text-danger">{{ getErrorFor('step') }}</small>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="tickets_amount">Quantidade de bilhetes</label>
+        <input type="number" min="10" step="1" class="form-control" value="{{ old('tickets_amount', type.tickets_amount || '') }}" id="tickets_amount" name="tickets_amount">
+        @if(hasErrorFor('tickets_amount'))
+            <small class="form-text text-danger">{{ getErrorFor('tickets_amount') }}</small>
+        @endif
+    </div>
+    <button type="submit" class="btn btn-outline-success btn-lg btn-block">Salvar</button>
+</form>

@@ -23,8 +23,14 @@ Route.get('/', 'HomeController.index').as('home').middleware('redirectAuth')
 Route.get('dashboard', 'HomeController.dashboard').as('dashboard').middleware('auth');
 
 Route.resource('raffles', 'RaffleController')
-.middleware(
-    new Map([[['create', 'store', 'edit', 'update', 'destroy'],['auth']]]));
+    .middleware(
+        new Map([[['create', 'store', 'edit', 'update', 'destroy'], ['auth']]]))
+    .validator(new Map([[['store', 'update'], ['StoreRaffle']]]));
 
 Route.post('raffles/:id/awards', 'RaffleController.storeAward').as('awards.store').middleware('auth')
 Route.get('raffes/:raffle/buy/:id', 'RaffleController.buy').as('raffles.buy').middleware('auth')
+
+Route.get('types', 'TypeController.index').as('types.index').middleware(['auth', 'checkAdmin']);
+Route.post('types', 'TypeController.store').as('types.store').middleware(['auth', 'checkAdmin']);
+Route.get('types/create', 'TypeController.create').as('types.create').middleware(['auth', 'checkAdmin']);
+Route.get('types/:id', 'TypeController.show').as('types.show').middleware(['auth', 'checkAdmin']);

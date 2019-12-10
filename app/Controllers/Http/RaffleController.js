@@ -4,7 +4,9 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Raffle = use('App/Models/Raffle')
+const Raffle = use('App/Models/Raffle');
+const Type = use('App/Models/Type');
+
 /**
  * Resourceful controller for interacting with raffles
  */
@@ -34,7 +36,8 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async create({ request, response, view }) {
-    return view.render('raffles.create');
+    const types = (await Type.all()).rows;
+    return view.render('raffles.create', { types });
   }
 
   /**
@@ -131,18 +134,19 @@ class RaffleController {
     response.route('raffles.show', { id: raffle.id });
   }
 
-  async buy({ params, request, response, auth }){
+  async buy({ params, request, response, auth }) {
     const raffle = await Raffle.find(params.raffle);
+
     const ticket = (await raffle.tickets().where('id', params.id).fetch()).rows[0];
-    if(ticket.user_id == auth.user.id) {
+    if (ticket.user_id == auth.user.id) {
       ticket.user_id = null;
-    } else if(!ticket.user_id) {
+    } else if (!ticket.user_id) {
       ticket.user_id = auth.user.id;
     }
 
     await raffle.tickets().save(ticket);
 
-    response.route('raffles.show', {id: raffle.id })
+    response.route('raffles.show', { id: raffle.id })
   }
 }
 

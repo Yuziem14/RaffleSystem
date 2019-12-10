@@ -1,0 +1,36 @@
+@layout('layouts.app')
+
+@section('view-title')
+    RaffleSystem
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="bg-light p-2">
+            <div class="container">
+                <h2 class="text-center text-muted">{{ type.description }}</h2>
+            </div>
+        </div>
+        <div class="container pt-2 pb-3">
+            <div class="row d-flex flex-column align-items-center">
+                <div class="col-md-10 col-sm-12">
+                    <a href="{{ route('types.index') }}" class="btn btn-outline-light mb-3"><i class="fas fa-arrow-left"></i> Voltar</a>
+                    <div class="shadow-box text-white p-3">
+                        <h5 class="text-justify mb-5">{{ type.description }}</h5>
+                        <p>
+                            Primeiro Número:
+                            <span class="badge badge-light p-1">
+                                {{ type.first_number }}
+                            </span>
+                        </p>
+                        <p>
+                            Passo: 
+                            <span class="badge badge-primary">{{ type.step}}</span>
+                        </p>
+                        <p>Quantidade de bilhetes: <span class="badge badge-warning p-1">{{ type.tickets_amount }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection

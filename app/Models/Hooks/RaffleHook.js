@@ -3,10 +3,11 @@
 const RaffleHook = exports = module.exports = {}
 
 RaffleHook.generateTickets = async (raffle) => {
+    const type = await raffle.type().fetch();
     const tickets = [];
 
-    for (let i = 0; i < 1000; i++) {
-        tickets.push({ number: i + 1 });
+    for (let i = type.first_number; i < (type.tickets_amount * type.step); i += type.step) {
+        tickets.push({ number: i });
     }
 
     await raffle.tickets().createMany(tickets);

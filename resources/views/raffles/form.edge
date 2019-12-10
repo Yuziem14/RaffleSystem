@@ -2,40 +2,72 @@
     {{ csrfField() }}
     <div class="form-group">
         <label for="title">Título</label>
-        <input type="text" class="form-control" id="title" value="{{ raffle.title || '' }}" name="title">
+        <input type="text" class="form-control" id="title" value="{{ old('title', raffle.title || '') }}" name="title">
+        @if(hasErrorFor('title'))
+            <small class="form-text text-danger">{{ getErrorFor('title') }}</small>
+        @endif
     </div>
     <div class="form-group">
         <label for="description">Descricao</label>
-        <textarea class="form-control" id="description" name="description">{{ raffle.description || '' }}</textarea>
+        <textarea class="form-control" id="description" name="description">{{ old('description', raffle.description || '') }}</textarea>
+        @if(hasErrorFor('description'))
+            <small class="form-text text-danger">{{ getErrorFor('description') }}</small>
+        @endif
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="form-group">
                 <label for="probable_raffle_date">Previsão para sorteio</label>
-                <input type="datetime-local" class="form-control" id="probable_raffle_date" value="{{ raffle.probable_raffle_date || '' }}" name="probable_raffle_date">
+                <input type="datetime-local" class="form-control" id="probable_raffle_date" value="{{ old('probable_raffle_date', raffle.probable_raffle_date) || '' }}" name="probable_raffle_date">
+                @if(hasErrorFor('probable_raffle_date'))
+                    <small class="form-text text-danger">{{ getErrorFor('probable_raffle_date') }}</small>
+                @endif
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="start_date_sale">Inicio das vendas</label>
-                <input type="datetime-local" value="{{ raffle.start_date_sale || '' }}" class="form-control" id="start_date_sale" name="start_date_sale">
+                <input type="datetime-local" value="{{ old('start_date_sale', raffle.start_date_sale || '') }}" class="form-control" id="start_date_sale" name="start_date_sale">
+                @if(hasErrorFor('start_date_sale'))
+                    <small class="form-text text-danger">{{ getErrorFor('start_date_sale') }}</small>
+                @endif
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="end_date_sale">Fim das vendas</label>
-                <input type="datetime-local" class="form-control" value="{{ raffle.end_date_sale || '' }}" id="end_date_sale" name="end_date_sale">
+                <input type="datetime-local" class="form-control" value="{{ old('end_date_sale', raffle.end_date_sale || '') }}" id="end_date_sale" name="end_date_sale">
+                @if(hasErrorFor('end_date_sale'))
+                    <small class="form-text text-danger">{{ getErrorFor('end_date_sale') }}</small>
+                @endif
             </div>
         </div>
     </div>
     <div class="form-group">
+        <label for="type">Tipo da Rifa</label>
+        <select class="custom-select form-control" id="type" name="type_id">
+            @each(type in types)
+                <option value="{{ type.id }}">{{ type.description }}</option>              
+            @endeach
+        </select>
+        @if(hasErrorFor('type_id'))
+            <small class="form-text text-danger">{{ getErrorFor('type_id') }}</small>
+        @endif
+    </div>
+    <div class="form-group">
         <label for="ticket_price">Valor do bilhete</label>
-        <input type="number" min="0.00" step=".01" class="form-control" value="{{ raffle.ticket_price || '' }}" id="ticket_price" name="ticket_price">
+        <input type="number" min="0.00" step=".01" class="form-control" value="{{ old('ticket_price', raffle.ticket_price || '') }}" id="ticket_price" name="ticket_price">
+        @if(hasErrorFor('ticket_price'))
+            <small class="form-text text-danger">{{ getErrorFor('ticket_price') }}</small>
+        @endif
     </div>
     @if(!raffle.id)
         <div class="form-group">
             <label for="main_award">Premio #1:</label>
-            <input type="text" min="0" class="form-control" id="main_award" name="main_award">
+            <input type="text" min="0" class="form-control" id="main_award" value="{{ old('main_award', '') }}" name="main_award">
+            @if(hasErrorFor('main_award'))
+                <small class="form-text text-danger">{{ getErrorFor('main_award') }}</small>
+            @endif
         </div>
     @endif
     <button type="submit" class="btn btn-outline-success btn-lg btn-block">Salvar</button>

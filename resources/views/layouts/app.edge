@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,7 +40,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="/dashboard">Minhas Rifas</a>
-                  {{--  <a class="dropdown-item" href="#">Another action</a>  --}}
+                  @if(auth.user.admin)
+                  <a class="dropdown-item" href="{{ route('types.index') }}">Gerenciar Tipos</a>
+                    {{--  <a class="dropdown-item" href="#">Another action</a>  --}}
+                  @endif
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/logout">Logout</a>
                 </div>

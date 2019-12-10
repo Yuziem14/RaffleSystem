@@ -8,7 +8,7 @@ class TypesSchema extends Schema {
     this.create('types', (table) => {
       table.increments()
       table.string('description', 100).notNullable()
-      table.integer('firstNumber').notNullable()
+      table.integer('first_number').notNullable()
       table.integer('step').notNullable()
       table.integer('tickets_amount').notNullable().unsigned()
       table.timestamps()
