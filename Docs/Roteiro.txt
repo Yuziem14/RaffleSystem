@@ -1,0 +1,63 @@
+Trabalho Final - Desenvolvimento Web
+
+Aplicação para Gerência de Rifas Online
+
+Utilizando o framework AdonisJs, faça uma aplicação web que possibilite a criação e gerência de Rifas online.
+
+
+Requisitos mínimos (para conseguir um conceito C)
+Um Usuário pode se cadastrar e, após isso, iniciar uma nova rifa ou acessar a página de uma rifa existente.
+
+Uma Rifa tem título, informações textuais detalhadas, várias datas úteis e valor do bilhete (ver diagrama).
+
+Ao registrar uma nova rifa, gerar 1.000 bilhetes, numerados de 1 a 1.000.
+
+Ao cadastrar uma rifa, o usuário informa quais são os Prêmios que serão oferecidos para cada um dos sorteados (primeiro, segundo, terceiro, …). Observação: Uma rifa pode ter uma quantidade dinâmica e prêmios (no mínimo 1).
+
+Na página de cada rifa, além dos detalhes da mesma, usuários devem conseguir visualizar TODOS os bilhetes existentes para ela, diferenciando os comprados dos não comprados.
+
+Nesta mesma página, cada Bilhete pode ser individualmente comprado (um mesmo bilhete não pode ser comprado por mais de um usuário, mas um usuário pode comprar quantos bilhetes desejar da mesma rifa). Somente podem ser comprados bilhetes de rifas que estejam dentro do período de vendas.
+
+O usuário deve conseguir ver em sua página inicial, a qualquer momento, seu status com relação a rifas das quais participa, bem como das rifas que criou. Mostrar, por exemplo: quantidade de bilhetes comprados, valor investido, dias faltantes para o sorteio, opção de comprar mais bilhetes, quantidade de pessoas/bilhetes participando, etc.
+
+
+Fez tudo acima e quer um conceito B?
+Inclua o suporte a tipos de rifas (ver diagrama).
+
+Um Tipo define a quantidade e o formato de geração dos números bilhetes de cada rifa. Por exemplo:
+
+Gerar 100 bilhetes, começando do número 100 e numerados de 2 em 2 (100, 102, 104, 106, ... 500)
+quantidade_bilhetes = 200
+numero_inicial = 100
+passo = 2
+Tipo é uma entidade gerenciada somente pelo usuário administrador do sistema, portanto inclua as devidas verificações (middleware).
+
+
+Fez tudo acima e quer mirar em um conceito A?
+Somente após a data/hora prevista de sorteio, o usuário criador de uma rifa verá uma opção para realização de sorteio. Ao utilizá-la, ocorrerá o sorteio (randomizado pelo sistema) e os devidos bilhete_sorteado_id devem ser atualizados na tabela de prêmios.
+
+Somente bilhetes comprados podem ser sorteados.
+
+A página de cada Rifa deve mostrar quando a mesma já foi sorteada e quais foram os bilhetes/pessoas vencedoras.
+
+A página inicial do usuário deve mostrar que ele é o vendedor da rifa e qual o seu prêmio.
+
+
+Diagrama Entidade-Relacionamento Sugerido
+Observações:
+
+Não modificar a estrutura geral do modelo de dados (tabelas e relacionamentos)
+Você pode adicionar (não remover) tabelas ou atributos
+Você pode renomear tabelas ou atributos
+
+Restrições
+
+Trabalho pode ser realizado INDIVIDUALMENTE ou EM DUPLAS
+Para estilização, pode ser utilizado CSS puro ou qualquer framework CSS
+Utilizar CORRETAMENTE todos os conceitos/ferramentas abordados durante o ano:
+- HTML
+- CSS
+- JavaScript
+- Framework AdonisJs
+
+WMesmo que o problema seja igual para todos NÃO HÁ COMO O CÓDIGO-FONTE OU ASPECTO GERAL DOS TRABALHOS DE DOIS ALUNOS DISTINTOS SEREM IGUAIS OU MUITO PARECIDOS. Sendo detectada cópia, ambos receberão conceito D.
