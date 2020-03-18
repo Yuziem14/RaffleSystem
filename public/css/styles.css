@@ -1,107 +1,98 @@
 @keyframes slidein {
-    from {
-        left: -1000px;
-        opacity: 0;
-    }
+  from {
+    left: -1000px;
+    opacity: 0;
+  }
 
-    to {
-        left: 0;
-        opacity: 1;
-    }
+  to {
+    left: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes slideinTop {
-    from {
-        top: -1000px;
-        opacity: 0;
-    }
+  from {
+    top: -1000px;
+    opacity: 0;
+  }
 
-    to {
-        top: 0;
-        opacity: 1;
-    }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    height: 100vh;
-    margin-top: 56px;
+  height: 100vh;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .main {
-    min-height: 100%; 
-    background-color: #333;
+  min-height: 100%;
+  background-color: #333;
 }
 
 .painel {
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.4),
-            rgba(0, 0, 0, 0.4)
-        ),
-        url(../images/polygons.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(../images/polygons.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .shadow-box {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-top: solid 4px #00a8ff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-top: solid 4px #00a8ff;
 }
 
 .shadow-box--animation {
-    animation: slideinTop 2s;
+  animation: slideinTop 2s;
 }
 
 .welcome_text {
-    position: relative;
-    animation: slidein 2s;
-    color: #fff;
-    font-weight: 700;
-    text-align: center;
+  position: relative;
+  animation: slidein 2s;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
 }
 
 .boxes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
 }
 
 .image_icons {
-    width: 40%;
+  width: 40%;
 }
 
 .user__profile-photo {
-    width: 40%;
+  width: 40%;
 }
 
 .scroll-box {
-    height: 50vh;
-    overflow-y: auto;
+  height: 50vh;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 575px) {
-    .boxes {
-        grid-template-columns: 1fr;
-        grid-row-gap: 10px;
-    }
+  .boxes {
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+  }
 }
 
 @media screen and (min-width: 991px) {
-    body {
-        margin-top: 62px;
-    }
-
-    .nav-link {
-        padding-bottom: 14px
-    }
+  .nav-link {
+    padding-bottom: 14px;
+  }
 }

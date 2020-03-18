@@ -4,17 +4,29 @@
 const Schema = use('Schema')
 
 class TicketsSchema extends Schema {
-  up () {
-    this.create('tickets', (table) => {
+  up() {
+    this.create('tickets', table => {
       table.increments()
       table.integer('number').notNullable()
-      table.integer('raffle_id').unsigned().notNullable().references('id').inTable('raffles').onDelete('cascade')
-      table.integer('user_id').unsigned().nullable().references('id').inTable('users').onDelete('cascade')
+      table
+        .integer('raffle_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('raffles')
+        .onDelete('cascade')
+      table
+        .integer('user_id')
+        .unsigned()
+        .nullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('cascade')
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('tickets')
   }
 }

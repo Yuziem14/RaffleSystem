@@ -4,8 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Raffle = use('App/Models/Raffle');
-const Type = use('App/Models/Type');
+const Raffle = use('App/Models/Raffle')
+const Type = use('App/Models/Type')
 
 /**
  * Resourceful controller for interacting with raffles
@@ -21,9 +21,9 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const raffles = (await Raffle.all()).rows;
-    await Raffle.setTicketsCount(raffles);
-    return view.render('raffles.index', { raffles, now: new Date() });
+    const raffles = (await Raffle.all()).rows
+    await Raffle.setTicketsCount(raffles)
+    return view.render('raffles.index', { raffles, now: new Date() })
   }
 
   /**
@@ -36,8 +36,8 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async create({ request, response, view }) {
-    const types = (await Type.all()).rows;
-    return view.render('raffles.create', { types });
+    const types = (await Type.all()).rows
+    return view.render('raffles.create', { types })
   }
 
   /**
@@ -49,17 +49,17 @@ class RaffleController {
    * @param {Response} ctx.response
    */
   async store({ request, response, auth }) {
-    const { user } = auth;
+    const { user } = auth
 
-    const raffleData = request.except(['_csrf', 'main_award']);
-    raffleData.user_id = user.id;
-    const raffle = await Raffle.create(raffleData);
+    const raffleData = request.except(['_csrf', 'main_award'])
+    raffleData.user_id = user.id
+    const raffle = await Raffle.create(raffleData)
 
-    const award = { placing: 1, description: request.input('main_award') };
+    const award = { placing: 1, description: request.input('main_award') }
 
-    await raffle.awards().create(award);
+    await raffle.awards().create(award)
 
-    response.route('raffles.show', { id: raffle.id });
+    response.route('raffles.show', { id: raffle.id })
   }
 
   /**
@@ -72,10 +72,10 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async show({ params, request, response, view }) {
-    const { id } = params;
-    const raffle = await Raffle.find(id);
-    await raffle.loadMany(['tickets', 'awards', 'user']);
-    return view.render('raffles.show', { raffle });
+    const { id } = params
+    const raffle = await Raffle.find(id)
+    await raffle.loadMany(['tickets', 'awards', 'user'])
+    return view.render('raffles.show', { raffle })
   }
 
   /**
@@ -88,11 +88,11 @@ class RaffleController {
    * @param {View} ctx.view
    */
   async edit({ params, request, response, view }) {
-    const { id } = params;
-    const raffle = await Raffle.find(id);
-    await raffle.load('awards');
+    const { id } = params
+    const raffle = await Raffle.find(id)
+    await raffle.load('awards')
 
-    return view.render('raffles.edit', { raffle });
+    return view.render('raffles.edit', { raffle })
   }
 
   /**
@@ -103,7 +103,7 @@ class RaffleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) { }
+  async update({ params, request, response }) {}
 
   /**
    * Delete a raffle with id.
@@ -113,8 +113,7 @@ class RaffleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {
-  }
+  async destroy({ params, request, response }) {}
 
   /**
    * Store a new award for raffle
@@ -125,26 +124,31 @@ class RaffleController {
    * @param {Response} ctx.response
    */
   async storeAward({ params, request, response }) {
-    const raffle = await Raffle.find(params.id);
-    const awardData = request.only(['description']);
-    awardData.placing = (await raffle.awards().getMax('placing')) + 1;
+    const raffle = await Raffle.find(params.id)
+    const awardData = request.only(['description'])
+    awardData.placing = (await raffle.awards().getMax('placing')) + 1
 
-    await raffle.awards().create(awardData);
+    await raffle.awards().create(awardData)
 
-    response.route('raffles.show', { id: raffle.id });
+    response.route('raffles.show', { id: raffle.id })
   }
 
   async buy({ params, request, response, auth }) {
-    const raffle = await Raffle.find(params.raffle);
+    const raffle = await Raffle.find(params.raffle)
 
-    const ticket = (await raffle.tickets().where('id', params.id).fetch()).rows[0];
+    const ticket = (
+      await raffle
+        .tickets()
+        .where('id', params.id)
+        .fetch()
+    ).rows[0]
     if (ticket.user_id == auth.user.id) {
-      ticket.user_id = null;
+      ticket.user_id = null
     } else if (!ticket.user_id) {
-      ticket.user_id = auth.user.id;
+      ticket.user_id = auth.user.id
     }
 
-    await raffle.tickets().save(ticket);
+    await raffle.tickets().save(ticket)
 
     response.route('raffles.show', { id: raffle.id })
   }

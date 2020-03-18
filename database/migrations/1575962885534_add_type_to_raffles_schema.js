@@ -5,14 +5,20 @@ const Schema = use('Schema')
 
 class AddTypeToRafflesSchema extends Schema {
   up() {
-    this.table('raffles', (table) => {
-      table.integer('type_id').unsigned().notNullable().references('id').inTable('types').onDelete('cascade');
+    this.table('raffles', table => {
+      table
+        .integer('type_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('types')
+        .onDelete('cascade')
     })
   }
 
   down() {
-    this.table('raffles', (table) => {
-      table.dropForeign('type_id');
+    this.table('raffles', table => {
+      table.dropForeign('type_id')
     })
   }
 }

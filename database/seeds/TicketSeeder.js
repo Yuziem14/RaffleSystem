@@ -16,8 +16,8 @@ const Raffle = use('App/Models/Raffle')
 
 class TicketSeeder {
   static async run(number, raffle) {
-    const tickets = await Factory.model('App/Models/Ticket').makeMany(number);
-    await raffle.tickets().saveMany(tickets);
+    const tickets = await Factory.model('App/Models/Ticket').makeMany(number)
+    await raffle.tickets().saveMany(tickets)
   }
 }
 

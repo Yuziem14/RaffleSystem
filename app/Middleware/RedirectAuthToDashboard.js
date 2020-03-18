@@ -9,9 +9,9 @@ class RedirectAuthToDashboard {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request, response, auth }, next) {
+  async handle({ request, response, auth }, next) {
     // call next to advance the request
-    if(auth.user) {
+    if (auth.user) {
       response.route('dashboard')
     }
     await next()

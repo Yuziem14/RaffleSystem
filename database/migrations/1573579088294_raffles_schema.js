@@ -4,8 +4,8 @@
 const Schema = use('Schema')
 
 class RafflesSchema extends Schema {
-  up () {
-    this.create('raffles', (table) => {
+  up() {
+    this.create('raffles', table => {
       table.increments()
       table.string('title', 45).notNullable()
       table.text('description').nullable()
@@ -14,12 +14,18 @@ class RafflesSchema extends Schema {
       table.datetime('end_date_sale').notNullable()
       table.datetime('raffle_date').nullable()
       table.float('ticket_price').notNullable()
-      table.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete('cascade')
+      table
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('cascade')
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('raffles')
   }
 }

@@ -47,7 +47,7 @@
         <label for="type">Tipo da Rifa</label>
         <select class="custom-select form-control" id="type" name="type_id">
             @each(type in types)
-                <option value="{{ type.id }}">{{ type.description }}</option>              
+                <option value="{{ type.id }}">{{ type.description }}</option>
             @endeach
         </select>
         @if(hasErrorFor('type_id'))

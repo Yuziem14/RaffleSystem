@@ -1,6 +1,6 @@
-'use strict';
-const Config = use('Config');
-const BaseExceptionHandler = use('BaseExceptionHandler');
+'use strict'
+const Config = use('Config')
+const BaseExceptionHandler = use('BaseExceptionHandler')
 
 class ExceptionHandler extends BaseExceptionHandler {
   async handle(error, { response }) {
@@ -8,7 +8,7 @@ class ExceptionHandler extends BaseExceptionHandler {
       error.name === 'InvalidLoginException' ||
       error.name === 'InvalidSessionException'
     ) {
-      return response.redirect(Config.get('adonis-auth-scaffold.loginRoute'));
+      return response.redirect(Config.get('adonis-auth-scaffold.loginRoute'))
     }
     if (
       error.name === 'HttpException' &&
@@ -16,13 +16,13 @@ class ExceptionHandler extends BaseExceptionHandler {
     ) {
       return response.redirect(
         Config.get('adonis-auth-scaffold.registrationSuccessRedirectTo')
-      );
+      )
     }
 
-    return super.handle(...arguments);
+    return super.handle(...arguments)
   }
 
   async report(error, { request }) {}
 }
 
-module.exports = ExceptionHandler;
+module.exports = ExceptionHandler

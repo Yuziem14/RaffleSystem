@@ -4,13 +4,13 @@
 const Model = use('Model')
 
 class Award extends Model {
-    raffle () {
-        return this.belongsTo('App/Models/Raffle')
-    }
+  raffle() {
+    return this.belongsTo('App/Models/Raffle')
+  }
 
-    ticket () {
-        return this.hasOne('App/Models/Ticket')
-    }
+  ticket() {
+    return this.hasOne('App/Models/Ticket')
+  }
 }
 
 module.exports = Award

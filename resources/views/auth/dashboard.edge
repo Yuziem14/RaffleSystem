@@ -60,11 +60,15 @@ Dashboard
                       @else
                         <p class="card-text font-weight-bold text-danger mb-0">BILHETES ESGOTADOS!</p>
                       @endif
-                    @else
-                    <p class="card-text font-weight-bold text-danger mb-0">PERÍODO DE VENDA ESGOTADO!</p>
+                    @elseif(now < raffle.start_date_sale)
+                      <p class="card-text font-weight-bold text-warning mb-0">Á VENDA EM BREVE!</p>
+                    @elseif(now > raffle.end_date_sale)
+                      <p class="card-text font-weight-bold text-danger mb-0">PERÍODO DE VENDA ESGOTADO!</p>
                     @endif
-                    @if(raffle.probable_raffle_date > now)
+                    @if(raffle.probable_raffle_date > now && raffle.raffle_date === null)
                       <p class="card-text font-weight-bold">Restam {{ raffle.days }} dias para o sorteio</p>
+                    @elseif(raffle.probable_raffle_date < now && raffle.raffle_date === null)
+                      <a href="{{ route('raffles.create') }}" class="btn btn-outline-success">Sortear <i class="fas fa-hat-wizard"></i></a>
                     @endif
                 </div>
               </div>

@@ -6,7 +6,7 @@ class StoreType {
       description: 'required|min:5|max:45',
       first_number: 'required|number|above:-1',
       step: 'required|number|above:0',
-      tickets_amount: 'required|number|above:10'
+      tickets_amount: 'required|number|above:9'
     }
   }
 
@@ -22,13 +22,14 @@ class StoreType {
       'step.number': 'O passo deve ser um número válido.',
       'step.above': 'O passo deve ser maior que 0',
       'tickets_amount.required': 'Por favor, informe a quantidade de bilhetes.',
-      'tickets_amount.number': 'A quantidade de bilhetes deve ser um número válido.',
+      'tickets_amount.number':
+        'A quantidade de bilhetes deve ser um número válido.',
       'tickets_amount.above': 'A quantidade minima de bilhetes é 10.'
-    };
+    }
   }
 
   get validateAll() {
-    return true;
+    return true
   }
 }
 

@@ -12,7 +12,7 @@ class RedirectsAuthToDashboard {
   async handle({ request, response, auth }, next) {
     // call next to advance the request
     if (await auth.check()) {
-      response.route('/dashboard');
+      response.route('/dashboard')
     }
     await next()
   }

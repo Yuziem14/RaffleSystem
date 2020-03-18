@@ -23,7 +23,7 @@ class TypeSeeder {
       tickets_amount: 1000
     }
 
-    await Type.create(typeData);
+    await Type.create(typeData)
   }
 }
 

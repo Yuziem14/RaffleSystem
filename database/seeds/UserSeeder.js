@@ -15,8 +15,8 @@ const Factory = use('Factory')
 
 class UserSeeder {
   static async run(number) {
-    const users = await Factory.model('App/Models/User').createMany(number);
-    return users;
+    const users = await Factory.model('App/Models/User').createMany(number)
+    return users
   }
 }
 

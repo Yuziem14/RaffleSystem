@@ -1,62 +1,66 @@
-"use strict";
+'use strict'
 
-const Persona = use("Persona");
-const Config = use("Config");
+const Persona = use('Persona')
+const Config = use('Config')
 
-const { validate } = use("Validator");
+const { validate } = use('Validator')
 
 class AuthController {
   async login({ request, auth, response, session }) {
-    const payload = request.only(["uid", "password"]);
+    const payload = request.only(['uid', 'password'])
 
-    const user = await Persona.verify(payload);
+    const user = await Persona.verify(payload)
 
-    await auth.login(user);
-    response.redirect(Config.get("adonis-auth-scaffold.registrationSuccessRedirectTo"));
+    await auth.login(user)
+    response.redirect(
+      Config.get('adonis-auth-scaffold.registrationSuccessRedirectTo')
+    )
   }
 
   async register({ request, auth, response, session }) {
     const payload = request.only([
-      "email",
-      "name",
-      "password",
-      "password_confirmation"
-    ]);
+      'email',
+      'name',
+      'password',
+      'password_confirmation'
+    ])
 
     const validation = await validate(
       payload,
-      Config.get("adonis-auth-scaffold.validationRules.registration"),
-      Config.get("adonis-auth-scaffold.validationMessages")()
-    );
+      Config.get('adonis-auth-scaffold.validationRules.registration'),
+      Config.get('adonis-auth-scaffold.validationMessages')()
+    )
 
     if (validation.fails()) {
-      session.withErrors(validation.messages()).flashAll();
-      return response.redirect("back");
+      session.withErrors(validation.messages()).flashAll()
+      return response.redirect('back')
     }
 
-    const user = await Persona.register(payload);
+    const user = await Persona.register(payload)
 
     // optional
-    await auth.login(user);
-    response.redirect('dashboard');
+    await auth.login(user)
+    response.redirect('dashboard')
   }
 
   async forgotPassword({ request, response, session, auth }) {
-    const token = request.input('token');
-    const uid = request.input('uid');
-    const payload = request.only(['password', 'password_confirmation']);
+    const token = request.input('token')
+    const uid = request.input('uid')
+    const payload = request.only(['password', 'password_confirmation'])
 
     if (!token) {
-      await Persona.forgotPassword(uid);
+      await Persona.forgotPassword(uid)
       session.flash({ hasMadeResetRequest: 'true' })
       return response.redirect('back')
     }
 
     try {
-      const user = await Persona.updatePasswordByToken(token, payload);
+      const user = await Persona.updatePasswordByToken(token, payload)
 
-      await auth.login(user);
-      return response.redirect(Config.get("adonis-auth-scaffold.registrationSuccessRedirectTo"));
+      await auth.login(user)
+      return response.redirect(
+        Config.get('adonis-auth-scaffold.registrationSuccessRedirectTo')
+      )
     } catch (error) {
       if (error.name === 'InvalidTokenException') {
         session.flash({ errorMessage: 'The token supplied is not valid.' })
@@ -69,24 +73,24 @@ class AuthController {
   }
 
   getLogin({ request, response, view }) {
-    return view.render("auth.login");
+    return view.render('auth.login')
   }
 
   getRegister({ request, response, view }) {
-    return view.render("auth.register");
+    return view.render('auth.register')
   }
 
   getResetPassword({ request, response, view, params }) {
-    const token = request.input('token');
-    return view.render("auth.password-reset", { token });
+    const token = request.input('token')
+    return view.render('auth.password-reset', { token })
   }
 
   getLogout({ response, session }) {
-    const loginRoute = Config.get("adonis-auth-scaffold.loginRoute");
-    session.clear();
+    const loginRoute = Config.get('adonis-auth-scaffold.loginRoute')
+    session.clear()
 
     return response.redirect(loginRoute)
   }
 }
 
-module.exports = AuthController;
+module.exports = AuthController

@@ -1,6 +1,6 @@
-"use strict";
+'use strict'
 
-const Env = use('Env');
+const Env = use('Env')
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ module.exports = {
   | Specifies the route to handle registration GET and POST requests.
   |
   */
-  registrationRoute: "/register",
+  registrationRoute: '/register',
 
   /*
   |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ module.exports = {
   | Leave empty if you do not want any redirects.
   |
   */
-  registrationSuccessRedirectTo: "/dashboard",
+  registrationSuccessRedirectTo: '/dashboard',
 
   /*
   |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ module.exports = {
   | Specifies the route to handle login GET and POST requests.
   |
   */
-  loginRoute: "/login",
+  loginRoute: '/login',
 
   /*
   |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ module.exports = {
   | Specifies the route to handle password reset GET and POST requests.
   |
   */
-  passwordResetRoute: "/password/reset",
+  passwordResetRoute: '/password/reset',
 
   /*
   |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ module.exports = {
   | Specifies the route to handle logout GET and POST requests.
   |
   */
-  logoutRoute: "/logout",
+  logoutRoute: '/logout',
 
   /*
   |--------------------------------------------------------------------------
@@ -84,10 +84,10 @@ module.exports = {
   */
   validationRules: {
     registration: {
-      email: "required|email",
-      name: "required|min:3",
-      password: "required",
-      password_confirmation: "required|same:password"
+      email: 'required|email',
+      name: 'required|min:3',
+      password: 'required',
+      password_confirmation: 'required|same:password'
     }
   },
 
@@ -101,14 +101,14 @@ module.exports = {
   */
   validationMessages: action => {
     return {
-      "uid.required": "Preencha o email ou nome de usuario!.",
-      "name.required": "O nome é obrigatorio!",
-      "name.min": "O campo nome deve ter ao menos 3 caracteres!",
-      "email.required": "O Email é obrigatorio!",
-      "email.email": "Use um endereço de Email valido!",
-      "password.required": "Informe uma senha!",
-      "password.mis_match": "Senha invalida!",
-      "password_confirmation.same": `Confirme a senha corretamente!`
-    };
+      'uid.required': 'Preencha o email ou nome de usuario!.',
+      'name.required': 'O nome é obrigatorio!',
+      'name.min': 'O campo nome deve ter ao menos 3 caracteres!',
+      'email.required': 'O Email é obrigatorio!',
+      'email.email': 'Use um endereço de Email valido!',
+      'password.required': 'Informe uma senha!',
+      'password.mis_match': 'Senha invalida!',
+      'password_confirmation.same': `Confirme a senha corretamente!`
+    }
   }
-};
+}

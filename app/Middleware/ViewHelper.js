@@ -1,14 +1,14 @@
-"use strict";
-const Config = use("Config");
+'use strict'
+const Config = use('Config')
 
 class ViewHelper {
   async handle({ view }, next) {
     view.share({
       Config: Config
-    });
+    })
     // call next to advance the request
-    await next();
+    await next()
   }
 }
 
-module.exports = ViewHelper;
+module.exports = ViewHelper

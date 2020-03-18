@@ -1,6 +1,6 @@
 'use strict'
 
-const Hash = use('Hash');
+const Hash = use('Hash')
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const Hash = use('Hash');
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
 
-Factory.blueprint('App/Models/User', async (faker) => {
+Factory.blueprint('App/Models/User', async faker => {
   return {
     name: faker.name(),
     email: faker.email(),
@@ -26,10 +26,10 @@ Factory.blueprint('App/Models/User', async (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Raffle', async (faker) => {
-  const date = new Date();
-  const startDate = new Date();
-  const endDate = new Date(date.setMonth(date.getMonth() + 1));
+Factory.blueprint('App/Models/Raffle', async faker => {
+  const date = new Date()
+  const startDate = new Date()
+  const endDate = new Date(date.setMonth(date.getMonth() + 1))
 
   return {
     title: faker.word({ syllables: 5 }),

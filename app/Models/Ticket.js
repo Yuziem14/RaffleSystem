@@ -4,17 +4,17 @@
 const Model = use('Model')
 
 class Ticket extends Model {
-    user () {
-        return this.belongsTo('App/Models/User')
-    }
+  user() {
+    return this.belongsTo('App/Models/User')
+  }
 
-    raffle () {
-        return this.belongsTo('App/Models/Raffle')
-    }
+  raffle() {
+    return this.belongsTo('App/Models/Raffle')
+  }
 
-    award () {
-        return this.hasOne('App/Models/Award')
-    }
+  award() {
+    return this.hasOne('App/Models/Award')
+  }
 }
 
 module.exports = Ticket

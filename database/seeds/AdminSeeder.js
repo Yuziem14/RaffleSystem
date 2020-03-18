@@ -21,9 +21,9 @@ class AdminSeeder {
       email: 'admin@email.com',
       password: 'secret123',
       admin: true
-    };
+    }
 
-    await User.create(userData);
+    await User.create(userData)
   }
 }
 
